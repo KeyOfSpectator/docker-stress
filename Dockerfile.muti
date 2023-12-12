@@ -1,0 +1,12 @@
+FROM --platform=$BUILDPLATFORM ubuntu:trusty
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+ARG BUILDARCH
+ARG TARGETARCH
+
+RUN echo "I am running on $BUILDPLATFORM $BUILDARCH, building for $TARGETPLATFORM $TARGETARCH"
+
+RUN apt-get update && apt-get install -y stress && rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["/usr/bin/stress", "--verbose"]
+CMD []
